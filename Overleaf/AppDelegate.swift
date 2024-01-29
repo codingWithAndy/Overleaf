@@ -9,9 +9,17 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    var windowControllers: [NSWindowController] = []
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        // Create a new window controller for each instance
+                let windowController = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "MainWindowController") as! NSWindowController
+                windowControllers.append(windowController)
+
+                // Show the window
+                windowController.showWindow(self)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
