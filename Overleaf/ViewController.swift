@@ -37,34 +37,6 @@ class ViewController: NSViewController, WKNavigationDelegate {
         // You can update UI or show loading indicators if needed
     }
     
-    //    // This method is called when the webpage title is received
-    //        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    //            // Get the webpage title
-    //            webView.evaluateJavaScript("document.title") { (result, error) in
-    //                if let title = result as? String {
-    //                    // Update the window title
-    //                    self.view.window?.title = title
-    ////                    self.windowTitleLabel.stringValue = title
-    //                }
-    //            }
-    //        }
-    
-    //    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    //            updateWindowTitle()
-    //        }
-    //
-    //        // Additional method to update the window title
-    //        private func updateWindowTitle() {
-    //            webView.evaluateJavaScript("document.title") { (result, error) in
-    //                if let title = result as? String {
-    //                    // Update the window title
-    //                    self.view.window?.title = title
-    //                    print("Tile value is \(title)")
-    ////                    self.windowTitleLabel.stringValue = title
-    //                }
-    //            }
-    //
-    //        }
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
             grabWebPageTitleFromHead()
         }
@@ -72,12 +44,6 @@ class ViewController: NSViewController, WKNavigationDelegate {
         // Method to grab the webpage title from the <head> section
     private func grabWebPageTitleFromHead() {
         webView.evaluateJavaScript("document.head.querySelector('title').text") { (result, error) in
-            //                if let title = result as? String {
-            //                    // Use the title as needed
-            //                    self.view.window?.title = title
-            //                    print("Webpage Title: \(title)")
-            //                }
-            //            }
             if let title = result as? String {
                 // Extract text up until " - " and remove everything after it
                 if let index = title.range(of: " - ")?.lowerBound {
@@ -86,11 +52,9 @@ class ViewController: NSViewController, WKNavigationDelegate {
                     
                     // Use the final title as needed
                     self.view.window?.title = finalTitle
-//                    print("Webpage Title: \(finalTitle)")
                 } else {
                     // If " - " is not found, use the original title
                     self.view.window?.title = title
-//                    print("Webpage Title: \(title)")
                 }
             }
         }
